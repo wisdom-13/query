@@ -1,9 +1,11 @@
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import Products from './Products';
 
 export default function MainProducts() {
   const [showLeftProducts, setShowLeftProducts] = useState(true);
   const [showRightProducts, setShowRightProducts] = useState(true);
+  const client = useQueryClient();
   return (
     <main className='container'>
       <div>
@@ -18,6 +20,7 @@ export default function MainProducts() {
           Toggle
         </button>
       </div>
+      <button onClick={() => { client.invalidateQueries(['products', false]) }}>정보가 업데이트 됐어요!</button>
     </main>
   );
 }
